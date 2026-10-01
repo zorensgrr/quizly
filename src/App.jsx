@@ -47,6 +47,19 @@ const App = function () {
     }
   };
 
+  const tryAgain = function () {
+    setAnswers({});
+    setCurrentQuestion(0);
+    setIsGameOver(false);
+  };
+
+  const storeAnswers = function (questionIndex, answer) {
+    setAnswers(prev => ({
+      ...prev,
+      [questionIndex]: answer,
+    }));
+  };
+
   //////////////////////
   return (
     <>
@@ -72,9 +85,16 @@ const App = function () {
             question={question}
             currentQuestion={currentQuestion}
             nextQuestion={nextQuestion}
+            storeAnswers={storeAnswers}
           />
         ) : (
-          <QuizResult quiz={quiz} resetQuiz={resetQuiz} />
+          <QuizResult
+            quiz={quiz}
+            totalQuestions={totalQuestions}
+            answers={answers}
+            resetQuiz={resetQuiz}
+            tryAgain={tryAgain}
+          />
         )}
       </main>
     </>

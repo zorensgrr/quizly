@@ -197,7 +197,7 @@ legend {
   width: 100%;
   padding: 0.8rem 1rem;
   border: 1px solid rgb(216, 215, 215);
-  border-radius: 999px;
+  border-radius: 0.7rem;
   background: white;
   color: #18213d;
   font-size: 1rem;
@@ -214,7 +214,7 @@ legend {
 .item-option input:checked + label {
   border-color: var(--primary-color);
   background: var(--primary-color);
-  color: aliceblue;
+  color: white;
   box-shadow: 0 3px 15px -2px rgba(0, 0, 0, 0.2);
 }
 
@@ -224,13 +224,13 @@ legend {
   height: 3rem;
   min-width: 8.5rem;
   padding: 0.8rem 1.5rem;
-  color: aliceblue;
+  color: white;
   font-family: inherit;
   font-size: 1.2rem;
   font-weight: 600;
   background-color: var(--primary-color);
   border: none;
-  border-radius: 2rem;
+  border-radius: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -417,7 +417,7 @@ legend {
   width: 7rem;
   height: 2.8rem;
   border: none;
-  border-radius: 2rem;
+  border-radius: 0.7rem;
   background: var(--primary-color);
   color: white;
   font-size: 0.9rem;
@@ -454,9 +454,11 @@ legend {
 .result {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .results-content {
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -464,7 +466,111 @@ legend {
 }
 
 .result-trophy {
-  height: 15rem;
+  height: 12rem;
+}
+
+.results-content h4 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.results-content span {
+  color: var(--text-secondary);
+}
+
+.total-score {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.score-breakdown-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.correct,
+.incorrect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.icon-container img {
+  height: 1.2rem;
+  margin-right: 0.4rem;
+}
+
+.correct p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #149c5c;
+}
+
+.incorrect p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e62640;
+}
+
+.try-again,
+.new-category {
+  margin: auto;
+  width: 30rem;
+  height: 3rem;
+  min-width: 8.5rem;
+  padding: 0.8rem 1.5rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.try-again {
+  color: var(--primary-color);
+  background-color: white;
+  border: 1px solid rgb(216, 215, 215);
+}
+
+.try-again:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+.new-category {
+  margin-top: 1rem;
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.new-category::before {
+  content: '➜';
+  transform: rotate(180deg);
+  display: inline-block;
+  margin-right: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.new-category:hover {
+  transform: translateY(-2px);
+}
+
+.new-category:hover::before {
+  transform: rotate(180deg) translateX(5px);
 }
 
 /* !!!MEDIA QUERIES!!! */
@@ -579,6 +685,42 @@ legend {
   .next-button {
     width: 6.5rem;
     font-size: 0.85rem;
+  }
+
+  .result {
+    min-height: 36rem;
+    padding: 1.75rem 2rem;
+  }
+
+  .results-content {
+    margin-bottom: 2.5rem;
+  }
+
+  .result-trophy {
+    height: 10rem;
+  }
+
+  .results-content h4 {
+    font-size: 1.75rem;
+  }
+
+  .total-score {
+    font-size: 1.75rem;
+  }
+
+  .score-breakdown-container {
+    gap: 3rem;
+  }
+
+  .correct p,
+  .incorrect p {
+    font-size: 1.2rem;
+  }
+
+  .try-again,
+  .new-category {
+    width: 25rem;
+    font-size: 1rem;
   }
 }
 
@@ -713,5 +855,57 @@ legend {
 
   .next-button span {
     font-size: 1rem;
+  }
+
+  .result {
+    min-height: 34rem;
+    padding: 1.5rem 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .results-content {
+    margin-bottom: 2rem;
+    gap: 0.75rem;
+  }
+
+  .result-trophy {
+    height: 8rem;
+  }
+
+  .results-content h4 {
+    font-size: 1.5rem;
+  }
+
+  .results-content span {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .total-score {
+    font-size: 1.5rem;
+  }
+
+  .score-breakdown-container {
+    gap: 2.5rem;
+  }
+
+  .icon-container {
+    font-size: 0.8rem;
+  }
+
+  .icon-container img {
+    height: 1rem;
+  }
+
+  .correct p,
+  .incorrect p {
+    font-size: 1.1rem;
+  }
+
+  .try-again,
+  .new-category {
+    width: 100%;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 }

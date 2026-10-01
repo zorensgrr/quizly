@@ -1,10 +1,20 @@
 import { categories } from '../categories';
 import trophyAnimation from '../assets/trophy.svg';
-import vincent from '../assets/vincent.jpg';
+import correctIcon from '../assets/correct.png';
+import inCorrectIcon from '../assets/incorrect.png';
 
 const QuizResult = function (props) {
   // VALUES
   const category = categories.find(obj => obj.title === props.quiz[0].category);
+
+  // CALCULATE SCORE
+  let score = 0;
+
+  props.quiz.forEach((question, index) => {
+    if (props.answers[index] === question.correct_answer) score++;
+  });
+
+  console.log(score);
 
   return (
     <section className="result">
@@ -24,11 +34,37 @@ const QuizResult = function (props) {
           </button>
         </div>
       </div>
+
       <div className="results-content">
         <img className="result-trophy" src={trophyAnimation} alt="trophy" />
-        <h4>di na importante kung tama o mali ka, ang mahalaga tinapos mo</h4>
-        <img src={vincent} alt="si vincent" />
+        <h4>Quiz Complete!</h4>
+        <span>You scored</span>
+        <p className="total-score">
+          {score} / {props.totalQuestions}
+        </p>
+        <div className="score-breakdown-container">
+          <div className="correct">
+            <div className="icon-container">
+              <img src={correctIcon} alt="check" />
+              Correct
+            </div>
+            <p>{score}</p>
+          </div>
+          <div className="incorrect">
+            <div className="icon-container">
+              <img src={inCorrectIcon} alt="check" />
+              Incorrect
+            </div>
+            <p>{Math.abs(score - props.totalQuestions)}</p>
+          </div>
+        </div>
       </div>
+      <button onClick={props.tryAgain} className="try-again">
+        Try again
+      </button>
+      <button onClick={props.resetQuiz} className="new-category">
+        New category
+      </button>
     </section>
   );
 };
