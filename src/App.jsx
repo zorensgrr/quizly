@@ -74,7 +74,7 @@ const App = function () {
             nextQuestion={nextQuestion}
           />
         ) : (
-          <QuizResult />
+          <QuizResult quiz={quiz} resetQuiz={resetQuiz} />
         )}
       </main>
     </>
