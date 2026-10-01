@@ -1,40 +1,29 @@
 import React from 'react';
-import QuizResult from './QuizResult';
 import { categories } from '../categories';
 
-const shuffleAnswers = function (question) {
-  return [question.correct_answer, ...question.incorrect_answers].sort(
-    () => Math.random() - 0.5,
-  );
-};
-
 const Quiz = function (props) {
-  // STATE
-  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  // FUNCTIONS
+  const shuffleAnswers = function (question) {
+    return [question.correct_answer, ...question.incorrect_answers].sort(
+      () => Math.random() - 0.5,
+    );
+  };
 
-  // VALUES
-  const totalQuestions = props.quiz.length;
-  const question = props.quiz[currentQuestion];
-
-  const category = categories.find(obj => obj.title === props.quiz[0].category);
-
-  const answers = shuffleAnswers(question);
-
-  const isQuizOver = currentQuestion + 1 === totalQuestions ? true : false;
-
-  // PROGRESS
-  const questionNumber = currentQuestion + 1;
-  const progress = (questionNumber / totalQuestions) * 100;
-
-  // HANDLER
   const nextQuestion = function (e) {
     e.preventDefault();
 
-    if (currentQuestion < totalQuestions - 1) {
-      setCurrentQuestion(prev => prev + 1);
-    }
+    props.nextQuestion();
   };
 
+  // VALUES
+  const category = categories.find(obj => obj.title === props.quiz[0].category);
+  const answers = shuffleAnswers(props.question);
+
+  // PROGRESS
+  const questionNumber = props.currentQuestion + 1;
+  const progress = (questionNumber / props.totalQuestions) * 100;
+
+  //////////////////////
   return (
     <section className="quiz">
       <form onSubmit={nextQuestion} className="quiz-form">
@@ -58,7 +47,7 @@ const Quiz = function (props) {
         <div className="quiz-progress">
           <div className="progress-info">
             <span>
-              Question {questionNumber} of {totalQuestions}
+              Question {questionNumber} of {props.totalQuestions}
             </span>
 
             <span>{Math.round(progress)}%</span>
@@ -73,7 +62,7 @@ const Quiz = function (props) {
         </div>
 
         <fieldset>
-          <legend className="quiz-question">{question.question}</legend>
+          <legend className="quiz-question">{props.question.question}</legend>
 
           <div className="answers-container">
             {answers.map((answer, index) => (
@@ -92,7 +81,9 @@ const Quiz = function (props) {
 
         <div className="quiz-footer">
           <button className="next-button">
-            {currentQuestion === totalQuestions - 1 ? 'Finish' : 'Next'}
+            {props.currentQuestion === props.totalQuestions - 1
+              ? 'Finish'
+              : 'Next'}
           </button>
         </div>
       </form>
